@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.6-SNAPSHOT'
+	id 'fabric-loom' version '1.11-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -26,10 +26,10 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation include("net.kyrptonaught:kyrptconfig:1.6.0-1.21") { exclude group: "net.fabricmc.fabric-api" }
+	modImplementation include("net.kyrptonaught:kyrptconfig:1.6.1-1.21.4") { exclude group: "net.fabricmc.fabric-api" }
 
 	//update modmenu when kyrptconfig is pulling old version
-	modImplementation("com.terraformersmc:modmenu:11.0.0-rc.2") { exclude group: "net.fabricmc.fabric-api" }
+	modImplementation("com.terraformersmc:modmenu:15.0.0-beta.3") { exclude group: "net.fabricmc.fabric-api" }
 
 //	//shulkerutils
 //	modImplementation 'net.kyrptonaught:shulkerutils:1.0.4-1.19'

@@ -22,7 +22,7 @@ public record OpenShulkerPacket(int invSlot) implements CustomPayload {
     public static void registerReceivePacket() {
         PayloadTypeRegistry.playC2S().register(OpenShulkerPacket.ID, OpenShulkerPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(OpenShulkerPacket.ID, OpenShulkerPacket.CODEC);
-        ServerPlayNetworking.registerGlobalReceiver(OpenShulkerPacket.ID, (payload, context) -> context.player().server.execute(() -> Util.openItem(context.player(), payload.invSlot)));
+        ServerPlayNetworking.registerGlobalReceiver(OpenShulkerPacket.ID, (payload, context) -> context.player().getServer().execute(() -> Util.openItem(context.player(), payload.invSlot)));
     }
 
     @Environment(EnvType.CLIENT)

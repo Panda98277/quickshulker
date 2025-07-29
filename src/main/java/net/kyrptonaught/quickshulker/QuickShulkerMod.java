@@ -17,8 +17,8 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.*;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 
 
 public class QuickShulkerMod implements ModInitializer, RegisterQuickShulker {
@@ -37,14 +37,14 @@ public class QuickShulkerMod implements ModInitializer, RegisterQuickShulker {
                 if (QuickShulkerMod.getConfig().rightClickToOpen) {
                     if (Util.isOpenableItem(stack) && Util.canOpenInHand(stack)) {
                         if (hand == Hand.MAIN_HAND)
-                            Util.openItem(player, 0, player.getInventory().selectedSlot);
+                            Util.openItem(player, 0, player.getInventory().getSelectedSlot());
                         else Util.openItem(player, 0, PlayerInventory.OFF_HAND_SLOT);
 
-                        return TypedActionResult.success(stack);
+                        return ActionResult.SUCCESS;
                     }
                 }
             }
-            return TypedActionResult.pass(stack);
+            return ActionResult.PASS;
         });
         FabricLoader.getInstance().getEntrypoints(MOD_ID, RegisterQuickShulker.class).forEach(RegisterQuickShulker::registerProviders);
     }
@@ -77,7 +77,7 @@ public class QuickShulkerMod implements ModInitializer, RegisterQuickShulker {
                     .setItem(CraftingTableBlock.class)
                     .ignoreSingleStackCheck(true)
                     .setOpenAction(((player, stack) -> player.openHandledScreen(new SimpleNamedScreenHandlerFactory((i, playerInventory, playerEntity) ->
-                            new CraftingScreenHandler(i, playerInventory, ScreenHandlerContext.create(player.getEntityWorld(), player.getBlockPos())), Text.translatable("container.crafting")))))
+                            new CraftingScreenHandler(i, playerInventory, ScreenHandlerContext.create(player.getWorld(), player.getBlockPos())), Text.translatable("container.crafting")))))
                     .register();
 
         if (getConfig().quickStonecutter)
@@ -85,7 +85,7 @@ public class QuickShulkerMod implements ModInitializer, RegisterQuickShulker {
                     .setItem(StonecutterBlock.class)
                     .ignoreSingleStackCheck(true)
                     .setOpenAction(((player, stack) -> player.openHandledScreen(new SimpleNamedScreenHandlerFactory((i, playerInventory, playerEntity) ->
-                            new StonecutterScreenHandler(i, playerInventory, ScreenHandlerContext.create(player.getEntityWorld(), player.getBlockPos())), Text.translatable("container.stonecutter")))))
+                            new StonecutterScreenHandler(i, playerInventory, ScreenHandlerContext.create(player.getWorld(), player.getBlockPos())), Text.translatable("container.stonecutter")))))
                     .register();
     }
 }

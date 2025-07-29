@@ -29,7 +29,7 @@ public class QuickShulkerModClient implements ClientModInitializer {
                     if (player.getMainHandStack().isEmpty() && !player.getOffHandStack().isEmpty())
                         ClientUtil.CheckAndSend(player.getOffHandStack(), 45);
                     else
-                        ClientUtil.CheckAndSend(player.getMainHandStack(), 36 + player.getInventory().selectedSlot);
+                        ClientUtil.CheckAndSend(player.getMainHandStack(), 36 + player.getInventory().getSelectedSlot());
                 }
             }
         });
